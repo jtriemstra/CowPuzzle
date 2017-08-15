@@ -27,7 +27,7 @@ namespace CowPuzzle
 
         public bool rotate()
         {
-            if (rotations == 3) return false;
+            //if (rotations == 3) return false;
 
             int temp = T;
             T = L;
@@ -39,9 +39,12 @@ namespace CowPuzzle
             return true;
         }
 
-        public void rotate(int turns)
+        public void rotate(int numberOfRotations)
         {
-
+            for (int i = 1; i <= numberOfRotations; i++)
+            {
+                rotate();
+            }
         }
 
         public void resetRotations()
