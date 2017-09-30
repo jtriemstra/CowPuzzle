@@ -13,11 +13,11 @@ namespace CowPuzzle
             Console.WriteLine(DateTime.Now);
             Puzzle p = new Puzzle();
             p.init();
-            /*DuplicateLimitingParallelStrategy b = new DuplicateLimitingParallelStrategy(p.bag);
-            b.bruteForce();*/
+            /*ISolvePuzzle objSolver = new DuplicateLimitingParallelStrategy(p.bag);
+            objSolver.solve();*/
 
-            EdgeFirstStrategy e = new EdgeFirstStrategy(p.bag);
-            e.test();
+            ISolvePuzzle objSolver = new EdgeFirstStrategy(p.bag);
+            objSolver.solve();
 
             Console.WriteLine("done");
             Console.WriteLine(DateTime.Now);

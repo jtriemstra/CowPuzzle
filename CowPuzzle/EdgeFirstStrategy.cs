@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CowPuzzle
 {
-    public class EdgeFirstStrategy
+    public class EdgeFirstStrategy : ISolvePuzzle
     {
         int[,] m_intEdges = new int[9, 4];
         Tile[] m_objBag;
@@ -48,7 +48,7 @@ namespace CowPuzzle
             Console.WriteLine();
         }
 
-        public void test()
+        public void solve()
         {
             Stack<Tile> used = new Stack<Tile>();
 
@@ -71,12 +71,12 @@ namespace CowPuzzle
             {
                 print(used);
             }
-            if (used.Count == 3 || used.Count == 6) recurseB(used);
-            else if (used.Count == 0 || used.Count == 1 || used.Count == 2) recurseR(used);
-            else recurseRB(used);
+            if (used.Count == 3 || used.Count == 6) recurseBottom(used);
+            else if (used.Count == 0 || used.Count == 1 || used.Count == 2) recurseRight(used);
+            else recurseRightAndBottom(used);
         }
         
-        public void recurseR(Stack<Tile> used)
+        public void recurseRight(Stack<Tile> used)
         {
             int nextEdgeValue = used.Peek().R * -1;
             
@@ -99,7 +99,7 @@ namespace CowPuzzle
             }
         }
 
-        public void recurseB(Stack<Tile> used)
+        public void recurseBottom(Stack<Tile> used)
         {
             Tile[] state = used.ToArray();
             int nextEdgeValue = state[2].B * -1;
@@ -123,7 +123,7 @@ namespace CowPuzzle
             }
         }
 
-        public void recurseRB(Stack<Tile> used)
+        public void recurseRightAndBottom(Stack<Tile> used)
         {
             int nextEdgeValueR = used.Peek().R * -1;
             Tile[] state = used.ToArray();

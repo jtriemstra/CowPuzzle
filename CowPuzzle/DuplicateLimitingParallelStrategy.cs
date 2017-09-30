@@ -13,7 +13,7 @@ namespace CowPuzzle
             
         }
 
-        override public void bruteForce()
+        override public void solve()
         {
             Parallel.For(0, m_lstCombinations.Count, i =>
             {
@@ -31,7 +31,7 @@ namespace CowPuzzle
             }
         }
         
-        override protected void bruteForceTry(int[] objCombination, int[] objRotation, Tile[] objTest, Arrangement a)
+        protected void bruteForceTry(int[] objCombination, int[] objRotation, Tile[] objTest, Arrangement a)
         {
             
             objTest[0] = bagRotations[objCombination[0], objRotation[0]];

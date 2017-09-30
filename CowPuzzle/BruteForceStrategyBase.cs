@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace CowPuzzle
 {
-    public class BruteForceStrategyBase
+    public abstract class BruteForceStrategyBase : ISolvePuzzle
     {
         protected List<PossibleCombination> m_lstCombinations = new List<PossibleCombination>();
         protected List<PossibleRotation> m_lstRotations = new List<PossibleRotation>();
         protected Tile[] bag;
 
-        protected void addCharacter(PossibleCombination previous)
+        abstract public void solve();
+
+        virtual protected void addCharacter(PossibleCombination previous)
         {
             PossibleCombination current;
 
@@ -37,7 +39,7 @@ namespace CowPuzzle
 
         }
 
-        protected void addRotation(PossibleRotation previous)
+        virtual protected void addRotation(PossibleRotation previous)
         {
             PossibleRotation current;
 

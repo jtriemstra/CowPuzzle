@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="Arrangement.cs" />
     <Compile Include="BruteForceStrategy.cs" />
+    <Compile Include="BruteForceStrategyBase.cs" />
     <Compile Include="DuplicateLimitingParallelStrategy.cs" />
     <Compile Include="DuplicateLimitingStrategy.cs" />
     <Compile Include="EdgeFirstStrategy.cs" />
+    <Compile Include="ISolvePuzzle.cs" />
     <Compile Include="NoObjectBruteForceStrategy.cs" />
     <Compile Include="ParallelBruteForceStrategy.cs" />
     <Compile Include="PossibleRotation.cs" />

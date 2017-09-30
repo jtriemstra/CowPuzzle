@@ -14,7 +14,7 @@ namespace CowPuzzle
             
         }
 
-        public void bruteForce()
+        override public void solve()
         {
             Parallel.For(0, m_lstCombinations.Count, i =>
             {

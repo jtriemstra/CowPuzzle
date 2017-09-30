@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CowPuzzle
 {
-    class NoObjectBruteForceStrategy
+    class NoObjectBruteForceStrategy : ISolvePuzzle
     {
         const int TOP_OFFSET = 0;
         const int RIGHT_OFFSET = 1;
@@ -39,7 +39,7 @@ namespace CowPuzzle
             Console.WriteLine("created combos and rotations");
         }
 
-        protected void addCharacter(int[] previous, int currentIndex)
+        virtual protected void addCharacter(int[] previous, int currentIndex)
         {
             if (currentIndex == 9)
             {
@@ -66,7 +66,7 @@ namespace CowPuzzle
 
         }
 
-        protected void addRotation(int[] previous, int currentIndex)
+        virtual protected void addRotation(int[] previous, int currentIndex)
         {
             if (currentIndex == 9)
             {
@@ -83,7 +83,7 @@ namespace CowPuzzle
             }
         }
 
-        public void bruteForce()
+        virtual public void solve()
         {
             for (int i = 0; i < m_lstCombinations.Count; i++)
             {

@@ -16,7 +16,7 @@ namespace CowPuzzle
             Console.WriteLine("created combos and rotations");
         }
 
-        public void bruteForce()
+        override public void solve()
         {
             for (int i = 0; i < m_lstCombinations.Count; i++)
             {
