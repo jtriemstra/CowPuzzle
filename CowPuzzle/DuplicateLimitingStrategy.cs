@@ -6,32 +6,14 @@ using System.Threading.Tasks;
 
 namespace CowPuzzle
 {
-    class DuplicateLimitingStrategy
+    class DuplicateLimitingStrategy : NoObjectBruteForceStrategy
     {
-        const int TOP_OFFSET = 0;
-        const int RIGHT_OFFSET = 1;
-        const int BOTTOM_OFFSET = 2;
-        const int LEFT_OFFSET = 3;
-        const int ARRAY_LENGTH = 4 * 9;
-
-        List<int[]> m_lstCombinations = new List<int[]>();
-        List<int[]> m_lstRotations = new List<int[]>();
-        Tile[] bag;
-        Tile[,] bagRotations = new Tile[9,4];
-
-        public DuplicateLimitingStrategy(Tile[] bag)
+        public DuplicateLimitingStrategy(Tile[] bag) : base(bag)
         {
-            this.bag = bag;
-            for (int j = 0; j < 9; j++)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    bagRotations[j, i] = bag[j].getRotatedCopy(i);
-                }
-            }
+            
         }
 
-        void addCharacter(int[] previous, int currentIndex)
+        override protected void addCharacter(int[] previous, int currentIndex)
         {
             if (currentIndex == 9)
             {
@@ -65,7 +47,7 @@ namespace CowPuzzle
 
         }
 
-        void addRotation(int[] previous, int currentIndex)
+        override protected void addRotation(int[] previous, int currentIndex)
         {
             if (currentIndex == 9)
             {
@@ -80,48 +62,6 @@ namespace CowPuzzle
                 current[currentIndex] = i;
                 addRotation(current, currentIndex + 1);                
             }
-        }
-
-        public void bruteForce()
-        {
-            int[] start = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            addCharacter(start, 0);
-            start = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            addRotation(start, 0);
-            Console.WriteLine("created combos and rotations");
-
-
-            for (int i = 0; i < m_lstCombinations.Count; i++)
-            {
-                for (int j = 0; j < m_lstRotations.Count; j++)
-                {
-                    bruteForceTry(m_lstCombinations[i], m_lstRotations[j]);
-                }
-
-                //if (i % 10000 == 0) Console.WriteLine(i);
-            }
-        }
-
-        Tile[] m_objTest = new Tile[9];
-        Arrangement a = new Arrangement();
-
-        void bruteForceTry(int[] objCombination, int[] objRotation)
-        {
-            for (int i = 0; i < 9; i++)
-            {
-                m_objTest[i] = bagRotations[objCombination[i], objRotation[i]];
-            }
-
-            if (a.evaluate(m_objTest))
-            {
-                for (int i = 0; i < 9; i++)
-                {
-                    Console.Write(objCombination[i] + "(" + objRotation[i] + ") ");
-                }
-                Console.WriteLine("");
-            }
-        }
-
-        
+        }              
     }
 }

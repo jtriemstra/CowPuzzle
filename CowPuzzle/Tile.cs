@@ -27,8 +27,6 @@ namespace CowPuzzle
 
         public bool rotate()
         {
-            //if (rotations == 3) return false;
-
             int temp = T;
             T = L;
             L = B;

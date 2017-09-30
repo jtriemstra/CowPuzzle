@@ -54,10 +54,8 @@ namespace CowPuzzle
 
             for (int i = 0; i < 9; i++)
             {
-                //Console.WriteLine("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
                 for (int j = 0; j < 4; j++)
                 {
-                    //Console.WriteLine("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
                     if (j > 0) m_objBag[i].rotate(j);
 
                     used.Push(m_objBag[i]);
@@ -69,7 +67,6 @@ namespace CowPuzzle
 
         public void recurse(Stack<Tile> used)
         {
-            //print(used);
             if (used.Count == 9)
             {
                 print(used);

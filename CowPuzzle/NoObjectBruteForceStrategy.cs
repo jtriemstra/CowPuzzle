@@ -14,10 +14,12 @@ namespace CowPuzzle
         const int LEFT_OFFSET = 3;
         const int ARRAY_LENGTH = 4 * 9;
 
-        List<int[]> m_lstCombinations = new List<int[]>();
-        List<int[]> m_lstRotations = new List<int[]>();
-        Tile[] bag;
-        Tile[,] bagRotations = new Tile[9,4];
+        protected List<int[]> m_lstCombinations = new List<int[]>();
+        protected List<int[]> m_lstRotations = new List<int[]>();
+        protected Tile[] bag;
+        protected Tile[,] bagRotations = new Tile[9, 4];
+        private Tile[] m_objTest = new Tile[9];
+        private Arrangement a = new Arrangement();
 
         public NoObjectBruteForceStrategy(Tile[] bag)
         {
@@ -29,9 +31,15 @@ namespace CowPuzzle
                     bagRotations[j, i] = bag[j].getRotatedCopy(i);
                 }
             }
+
+            int[] start = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+            addCharacter(start, 0);
+            start = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+            addRotation(start, 0);
+            Console.WriteLine("created combos and rotations");
         }
 
-        void addCharacter(int[] previous, int currentIndex)
+        protected void addCharacter(int[] previous, int currentIndex)
         {
             if (currentIndex == 9)
             {
@@ -58,7 +66,7 @@ namespace CowPuzzle
 
         }
 
-        void addRotation(int[] previous, int currentIndex)
+        protected void addRotation(int[] previous, int currentIndex)
         {
             if (currentIndex == 9)
             {
@@ -77,12 +85,6 @@ namespace CowPuzzle
 
         public void bruteForce()
         {
-            int[] start = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            addCharacter(start, 0);
-            start = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            addRotation(start, 0);
-            Console.WriteLine("created combos and rotations");
-
             for (int i = 0; i < m_lstCombinations.Count; i++)
             {
                 for (int j = 0; j < m_lstRotations.Count; j++)
@@ -94,10 +96,7 @@ namespace CowPuzzle
             }
         }
 
-        Tile[] m_objTest = new Tile[9];
-        Arrangement a = new Arrangement();
-
-        void bruteForceTry(int[] objCombination, int[] objRotation)
+        protected void bruteForceTry(int[] objCombination, int[] objRotation)
         {
             for (int i = 0; i < 9; i++)
             {
