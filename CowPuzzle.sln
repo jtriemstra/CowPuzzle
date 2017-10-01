@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildCombinations", "BuildC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursionTest", "RecursionTest\RecursionTest.csproj", "{89992A17-1F84-4A04-AC87-2D95DB7ECA10}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CowPuzzleFSharp", "CowPuzzleFSharp\CowPuzzleFSharp.fsproj", "{48226EB3-9DD7-43D5-BB95-4F48DABE2F87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{89992A17-1F84-4A04-AC87-2D95DB7ECA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89992A17-1F84-4A04-AC87-2D95DB7ECA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89992A17-1F84-4A04-AC87-2D95DB7ECA10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48226EB3-9DD7-43D5-BB95-4F48DABE2F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48226EB3-9DD7-43D5-BB95-4F48DABE2F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48226EB3-9DD7-43D5-BB95-4F48DABE2F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48226EB3-9DD7-43D5-BB95-4F48DABE2F87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

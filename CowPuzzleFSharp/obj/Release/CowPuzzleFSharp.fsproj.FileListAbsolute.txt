@@ -1,0 +1,9 @@
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\bin\Release\CowPuzzleFSharp.exe.config
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\bin\Release\CowPuzzleFSharp.XML
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\bin\Release\CowPuzzleFSharp.exe
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\bin\Release\CowPuzzleFSharp.pdb
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\bin\Release\FSharp.Core.dll
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\bin\Release\FSharp.Core.xml
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\obj\Release\CowPuzzleFSharp.fsprojResolveAssemblyReference.cache
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\obj\Release\CowPuzzleFSharp.exe
+C:\TestProjects\CowPuzzle\CowPuzzleFSharp\obj\Release\CowPuzzleFSharp.pdb

@@ -1,0 +1,49 @@
+what does shadowing look like in an app, not REPL window?
+what does val it : unit = () mean?
+allegedly whitespace sensitive, but this window seems to not be
+functions don't require typed parameters, but might be helpful for readability?
+- what's the type of a function passed as parameter?
+
+let chrisTest (test: (string -> string)) =
+    test "Chris"
+
+let isMe x =
+    if x = "Chris" then
+        "it is Chris!"
+    else
+        "it's someone else"
+
+chrisTest isMe
+
+
+
+let twoTest test =
+    test 2
+
+twoTest (fun x -> x < 0)
+
+parameterless functions must be explicitly declared as such with (), otherwise they will execute
+what does val blah : x:int list -> unit mean? specifically, "unit"
+List.average has some very interesting requirements around the type that can be passed - expands beyond the idea of inheritance
+an anonymous function passed as a parameter is wrapped with (). or maybe just all lambda functions...
+
+let firstHundred = [0..100]
+let doubled = List.map (fun x -> x * 2) firstHundred
+
+that doesn't explain the role of parens around List.filter in this (maybe that's like self-executing function in JS?):
+
+let firstHundred = [0..100]
+List.map
+    (fun x -> x * 2) 
+    (List.filter (fun x -> x % 2 = 0) firstHundred)
+
+important convention displayed here:
+[0..100]
+|> List.filter (fun x -> x % 2 = 0)
+|> List.map (fun x -> x * 2)
+|> List.sum
+
+ie, if a higher order function takes 2 params, a function and something to operate on, they should be in that order to support forward piping
+
+record types - include the type name in the parameter name? bleh
+
