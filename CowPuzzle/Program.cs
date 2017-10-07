@@ -21,7 +21,7 @@ namespace CowPuzzle
 
             Console.WriteLine("done");
             Console.WriteLine(DateTime.Now);
-            Console.ReadLine();
+            Console.ReadLine();            
         }
     }
 

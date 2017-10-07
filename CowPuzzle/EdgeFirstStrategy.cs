@@ -8,6 +8,7 @@ namespace CowPuzzle
 {
     public class EdgeFirstStrategy : ISolvePuzzle
     {
+        //TODO: can probably clean up
         int[,] m_intEdges = new int[9, 4];
         Tile[] m_objBag;
 

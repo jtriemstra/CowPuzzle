@@ -27,11 +27,7 @@ let bag = [|
         {Top=LAY_TOP; Right=BIG_TAIL; Bottom=NOSE_RIGHT; Left=SMALL_HEAD}
     |]
 
-let pointless x =
-    printfn "this is pointless"
 
-let add x y =
-    x + y
 
 [<EntryPoint>]
 let main argv = 
