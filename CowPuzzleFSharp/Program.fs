@@ -14,7 +14,7 @@ type Tile =
     Right: int;
     Bottom: int;
     Left: int }
-
+    
 let bag = [|
         {Top=NOSE_LEFT; Right=SMALL_TAIL; Bottom=LAY_BOTTOM; Left=BIG_TAIL},
         {Top=LAY_BOTTOM; Right=LAY_BOTTOM; Bottom=BIG_HEAD; Left=SMALL_HEAD},
@@ -27,10 +27,64 @@ let bag = [|
         {Top=LAY_TOP; Right=BIG_TAIL; Bottom=NOSE_RIGHT; Left=SMALL_HEAD}
     |]
 
+let rotate input num = 
+    match num with
+    | 0 -> input
+    | 1 -> {Top=input.Left; Right=input.Top; Bottom=input.Right; Left=input.Bottom}
+    | 2 -> {Top=input.Bottom; Right=input.Left; Bottom=input.Top; Left=input.Right}
+    | 3 -> {Top=input.Right; Right=input.Bottom; Bottom=input.Left; Left=input.Top}
+    | _ -> failwith "Invalid rotation"
 
+
+let push currentStack input = 
+    input::currentStack
+
+let pop currentStack = 
+    match currentStack with
+    | top::remainder ->
+        (top,remainder)
+    | [] ->
+        failwith "Stack is empty, can't pop"
+
+let printStack currentStack =
+    currentStack
+    |> List.map (fun x -> printf x + " ")
+
+let stackWrapper currentStack tile =
+//this should probably be chained to avoid the ignore
+//should i be returning a stack or a string? neither?
+    push currentStack tile |> ignore
+    recurse currentStack
+    pop currentStack
+
+let recurse (input:List<Tile>) =
+    match input.Length with
+    | 9 -> ""
+    | 3 | 6 -> ""
+    | 0 | 1 | 2 -> ""
+    | _ -> ""
+
+let recurseRight (input:List<Tile>) = 
+    let nextEdgeValue = input.[0].Right * -1
+    ()
+
+let rotationLoop tile =
+    [0..3]
+    |> List.map innerLoop tile
 
 [<EntryPoint>]
 let main argv = 
     printfn "%A" argv
+    let usedStack = []
+
+    for tile in bag do
+        for rotation in [0..3] do
+            tile
+            |> rotate rotation
+            //let newStack = push tile usedStack
+            //let x = pop usedStack
+            //()    
+            
+
     0 // return an integer exit code
 
