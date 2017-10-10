@@ -47,6 +47,7 @@
     <Compile Include="Arrangement.cs" />
     <Compile Include="BruteForceStrategy.cs" />
     <Compile Include="BruteForceStrategyBase.cs" />
+    <Compile Include="RecursiveReturnEdgeFirstStrategy.cs" />
     <Compile Include="ImmutableStackEdgeFirstStrategy.cs" />
     <Compile Include="DuplicateLimitingParallelStrategy.cs" />
     <Compile Include="DuplicateLimitingStrategy.cs" />
