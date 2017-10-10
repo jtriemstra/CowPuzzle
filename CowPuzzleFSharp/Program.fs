@@ -50,23 +50,29 @@ let printStack currentStack =
     currentStack
     |> List.map (fun x -> printf x + " ")
 
-let stackWrapper currentStack tile =
-//this should probably be chained to avoid the ignore
-//should i be returning a stack or a string? neither?
-    push currentStack tile |> ignore
-    recurse currentStack
-    pop currentStack
-
-let recurse (input:List<Tile>) =
+//is there a way to avoid this function "grouping"? can i unwind the recursion?
+let rec recurse (input:List<Tile>) =
     match input.Length with
     | 9 -> ""
     | 3 | 6 -> ""
-    | 0 | 1 | 2 -> ""
+    | 0 | 1 | 2 -> recurseRight input
     | _ -> ""
-
-let recurseRight (input:List<Tile>) = 
+and recurseRight (input:List<Tile>) = 
     let nextEdgeValue = input.[0].Right * -1
-    ()
+    
+    //temp return string
+    ""
+and recurseBottom (input:List<Tile>) =
+    //temp return string
+    ""
+
+let solveInnerLoop currentStack tile =
+//should i be returning a stack or a string? neither?
+    let newStack = push currentStack tile
+    recurse newStack
+    //don't think i need to pop b/c the stack is immutable
+
+
 
 let rotationLoop tile =
     [0..3]
