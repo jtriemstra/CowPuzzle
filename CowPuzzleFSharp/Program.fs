@@ -55,54 +55,65 @@ let printStack currentStack =
     currentStack
     |> List.map (fun x -> printf x + " ")
 
+let stackToString (currentStack:List<Tile>) = 
+    currentStack |> List.fold (fun string tile -> string + " " + tile.Id.ToString()) ""
+    
+
 let findEdgeOnLeft potentialTile edgeToFind = 
     let potentialTiles = [potentialTile; rotate potentialTile 1; rotate potentialTile 2; rotate potentialTile 3;]
     potentialTiles |> List.filter (fun x -> x.Left = edgeToFind)
 
+let findEdgeOnTop potentialTile edgeToFind = 
+    let potentialTiles = [potentialTile; rotate potentialTile 1; rotate potentialTile 2; rotate potentialTile 3;]
+    potentialTiles |> List.filter (fun x -> x.Top = edgeToFind)
+
+let findEdgeOnLeftAndTop potentialTile leftEdgeToFind topEdgeToFind = 
+    let potentialTiles = [potentialTile; rotate potentialTile 1; rotate potentialTile 2; rotate potentialTile 3;]
+    potentialTiles |> List.filter (fun x -> x.Top = topEdgeToFind && x.Left = leftEdgeToFind)
+
 //is there a way to avoid this function "grouping"? can i unwind the recursion?
 let rec recurse (input:List<Tile>) =
     match input.Length with
-    | 9 -> ""
-    | 3 | 6 -> ""
-    | 0 | 1 | 2 -> recurseRight input
-    | _ -> ""
+    | 0 -> start input
+    | 9 -> stackToString input
+    | 3 | 6 -> recurseBottom input
+    | 1 | 2 -> recurseRight input
+    | _ -> recurseRightAndBottom input
+and start (input:List<Tile>) =
+    let solutions = bag |> List.map (fun x-> recurse(x::input))
+    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    allSolutions
 and recurseRight (input:List<Tile>) = 
     let nextEdgeValue = input.[0].Right * -1
     let unusedTiles = bag |> List.filter (fun x -> not(stackContainsId input x.Id))
     let unusedTilesWithEdgeMatchOnLeft = unusedTiles |> List.collect (fun x -> findEdgeOnLeft x nextEdgeValue)
-    for newTile in unusedTilesWithEdgeMatchOnLeft do
-        recurse (newTile::input) |> ignore
-    //temp return string
-    ""
+    let solutions = unusedTilesWithEdgeMatchOnLeft |> List.map (fun x -> recurse(x::input))
+    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    allSolutions
 and recurseBottom (input:List<Tile>) =
-    //temp return string
-    ""
+    let nextEdgeValue = input.[2].Bottom * -1
+    let unusedTiles = bag |> List.filter (fun x -> not(stackContainsId input x.Id))
+    let unusedTilesWithEdgeMatchOnTop = unusedTiles |> List.collect (fun x -> findEdgeOnTop x nextEdgeValue)
+    let solutions = unusedTilesWithEdgeMatchOnTop |> List.map (fun x -> recurse(x::input))
+    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    allSolutions
+and recurseRightAndBottom (input:List<Tile>) = 
+    let nextLeftEdgeValue = input.[0].Right * -1    
+    let nextTopEdgeValue = input.[2].Bottom * -1
+    let unusedTiles = bag |> List.filter (fun x -> not(stackContainsId input x.Id))
+    let unusedTilesWithEdgeMatchOnTop = unusedTiles |> List.collect (fun x -> findEdgeOnLeftAndTop x nextLeftEdgeValue nextTopEdgeValue)
+    let solutions = unusedTilesWithEdgeMatchOnTop |> List.map (fun x -> recurse(x::input))
+    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    allSolutions
 
-let solveInnerLoop currentStack tile =
-//should i be returning a stack or a string? neither?
-    let newStack = push currentStack tile
-    recurse newStack
-    //don't think i need to pop b/c the stack is immutable
-
-
-
-let rotationLoop tile =
-    [0..3]
-    |> List.map innerLoop tile
 
 [<EntryPoint>]
 let main argv = 
     printfn "%A" argv
     let usedStack = []
 
-    for tile in bag do
-        for rotation in [0..3] do
-            tile
-            |> rotate rotation
-            //let newStack = push tile usedStack
-            //let x = pop usedStack
-            //()    
-            
+    let allSolutions = recurse usedStack
+    printfn "%s" allSolutions        
 
     0 // return an integer exit code
 
