@@ -81,21 +81,21 @@ let rec recurse (input:List<Tile>) =
     | _ -> recurseRightAndBottom input
 and start (input:List<Tile>) =
     let solutions = bag |> List.map (fun x-> recurse(x::input))
-    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    let allSolutions = if solutions.Length > 0 then solutions |> List.reduce (fun x y -> x + "\r\n" + y) else ""
     allSolutions
 and recurseRight (input:List<Tile>) = 
     let nextEdgeValue = input.[0].Right * -1
     let unusedTiles = bag |> List.filter (fun x -> not(stackContainsId input x.Id))
     let unusedTilesWithEdgeMatchOnLeft = unusedTiles |> List.collect (fun x -> findEdgeOnLeft x nextEdgeValue)
     let solutions = unusedTilesWithEdgeMatchOnLeft |> List.map (fun x -> recurse(x::input))
-    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    let allSolutions = if solutions.Length > 0 then solutions |> List.reduce (fun x y -> x + "\r\n" + y) else ""
     allSolutions
 and recurseBottom (input:List<Tile>) =
     let nextEdgeValue = input.[2].Bottom * -1
     let unusedTiles = bag |> List.filter (fun x -> not(stackContainsId input x.Id))
     let unusedTilesWithEdgeMatchOnTop = unusedTiles |> List.collect (fun x -> findEdgeOnTop x nextEdgeValue)
     let solutions = unusedTilesWithEdgeMatchOnTop |> List.map (fun x -> recurse(x::input))
-    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    let allSolutions = if solutions.Length > 0 then solutions |> List.reduce (fun x y -> x + "\r\n" + y) else ""
     allSolutions
 and recurseRightAndBottom (input:List<Tile>) = 
     let nextLeftEdgeValue = input.[0].Right * -1    
@@ -103,7 +103,7 @@ and recurseRightAndBottom (input:List<Tile>) =
     let unusedTiles = bag |> List.filter (fun x -> not(stackContainsId input x.Id))
     let unusedTilesWithEdgeMatchOnTop = unusedTiles |> List.collect (fun x -> findEdgeOnLeftAndTop x nextLeftEdgeValue nextTopEdgeValue)
     let solutions = unusedTilesWithEdgeMatchOnTop |> List.map (fun x -> recurse(x::input))
-    let allSolutions = solutions |> List.reduce (fun x y -> x + "\r\n" + y)
+    let allSolutions = if solutions.Length > 0 then solutions |> List.reduce (fun x y -> x + "\r\n" + y) else ""
     allSolutions
 
 
@@ -114,6 +114,8 @@ let main argv =
 
     let allSolutions = recurse usedStack
     printfn "%s" allSolutions        
+
+    System.Console.ReadLine() |> ignore
 
     0 // return an integer exit code
 

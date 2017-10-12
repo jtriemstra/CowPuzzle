@@ -16,7 +16,7 @@ namespace CowPuzzle
             /*ISolvePuzzle objSolver = new DuplicateLimitingParallelStrategy(p.bag);
             objSolver.solve();*/
 
-            ISolvePuzzle objSolver = new RecursiveReturnEdgeFirstStrategy(p.bag);
+            ISolvePuzzle objSolver = new EdgeFirstStrategy(p.bag);
             objSolver.solve();
 
             Console.WriteLine("done");
